@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 export default function Navbar() {
     const [navbar, setNavbar] = useState(false);
+    const [dropDown, setDropDown] = useState(false);
 
     return (
         <nav className="flex items-center justify-between flex-wrap bg-white py-4 lg:px-12 shadow border-solid border-t-2 border-gray-700">
@@ -36,10 +37,17 @@ export default function Navbar() {
                 </div>
                 <div className={`flex-1 text-black justify-self-center lg:block lg:pb-0 lg:mt-0 transition-all duration-500 ${
                             navbar ? "block" : "hidden delay-200"}`}>
-                    <a href="#responsive-header"
-                    className="block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">
-                        Create
-                    </a>
+                    <button onClick={() => setDropDown(!dropDown)} className="text-black font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button">Create <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                    <div id="dropdown" class={`${dropDown ? "visible": "hidden"} z-10 fixed bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-100`}>
+                        <ul class="py-1 text-sm text-black dark:text-gray-800" aria-labelledby="dropdownDefaultButton">
+                            <li>
+                                <a href="/personal" class="block px-4 py-2 hover:bg-gray-800 dark:hover:bg-gray-200 dark:hover:text-gray-800">Personal</a>
+                            </li>
+                            <li>
+                                <a href="/professional" class="block px-4 py-2 hover:bg-gray-800 dark:hover:bg-gray-200 dark:hover:text-gray-800">Professional</a>
+                            </li>
+                        </ul>
+                    </div>
                     <a href="#responsive-header"
                     className=" block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">
                         Browse
