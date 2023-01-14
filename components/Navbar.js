@@ -41,10 +41,10 @@ export default function Navbar() {
                     <div id="dropdown" class={`${dropDown ? "visible": "hidden"} z-10 fixed bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-100`}>
                         <ul class="py-1 text-sm text-black dark:text-gray-800" aria-labelledby="dropdownDefaultButton">
                             <li>
-                                <a href="/personal" class="block px-4 py-2 hover:bg-gray-800 dark:hover:bg-gray-200 dark:hover:text-gray-800">Personal</a>
+                                <Link href="/personal" class="block px-4 py-2 hover:bg-gray-800 dark:hover:bg-gray-200 dark:hover:text-gray-800">Personal</Link>
                             </li>
                             <li>
-                                <a href="/professional" class="block px-4 py-2 hover:bg-gray-800 dark:hover:bg-gray-200 dark:hover:text-gray-800">Professional</a>
+                                <Link href="/professional" class="block px-4 py-2 hover:bg-gray-800 dark:hover:bg-gray-200 dark:hover:text-gray-800">Professional</Link>
                             </li>
                         </ul>
                     </div>

@@ -16,6 +16,7 @@ const PageCover = React.forwardRef((props, ref) => {
       </div>
     );
   });
+  PageCover.displayName = "PageCover";
   
   const MainPage = React.forwardRef((props, ref) => {
     return (
@@ -28,6 +29,7 @@ const PageCover = React.forwardRef((props, ref) => {
       </div>
     );
   });
+  MainPage.displayName = "MainPage";
 
   const Page = React.forwardRef((props, ref) => {
     return (
@@ -39,6 +41,7 @@ const PageCover = React.forwardRef((props, ref) => {
       </div>
     );
   });
+  Page.displayName = "Page";
 
 
 export default function Form() {
