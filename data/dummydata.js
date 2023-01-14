@@ -36,7 +36,7 @@ export const storyData = [
      "user": "afbashdas123",
      "title": "The Witch's Curse",
      "category": "Fantasy",
-     "tone": "Mischievous",
+     "type": "Business",
      "storyPrompt": "You find yourself in a strange land and you come across an old witch in a dark cave.",
      "imagePrompt": "An old witch in a dark cave",
      "isPrivate": false,
@@ -57,7 +57,7 @@ export const storyData = [
     {
      "user": "jason13421",
      "title": "The Golden Key",
-     "category": "Fantasy",
+     "category": "Personal journal",
      "type": "Standard",
      "storyPrompt": "You find a mysterious golden key that unlocks a door to a secret world...",
      "imagePrompt": "A mysterious golden key",
@@ -68,7 +68,7 @@ export const storyData = [
     {
      "user": "jason13421",
      "title": "The Forbidden Forest",
-     "category": "Fantasy",
+     "category": "Personal journal",
      "type": "Standard",
      "storyPrompt": "You stumble upon a forbidden forest and find something lurking within...",
      "imagePrompt": "A forbidden forest",
