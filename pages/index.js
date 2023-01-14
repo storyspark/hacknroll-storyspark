@@ -1,12 +1,10 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
-import Navbar from '@/components/Navbar'
-
-const inter = Inter({ subsets: ['latin'] })
+import Head from 'next/head';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import Navbar from '@/components/Navbar';
 
 export default function Home() {
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -20,17 +18,17 @@ export default function Home() {
         <Navbar></Navbar>
         <div className='bg-white w-screen h-screen text-black pt-1'>
           <h1 className='font-custom1 capitalize text-center lg:text-[76px] text-[32px]'>Your Story Starts Here.</h1>
-          <Image src="/homepage-default.png" height={450} width={450} className="m-auto p-0 lg:h-[350px] lg:w-[350px] h-[250px] w-[250px]"></Image>
+          <Image alt="main" src="/homepage-default.png" height={450} width={450} className="m-auto p-0 lg:h-[350px] lg:w-[350px] h-[250px] w-[250px]"></Image>
           <p className='font-custom2 text-center mt-0 pt-0'>Unleash your imagination with StorySpark: <br/>
             AI-generated stories for every purpose
           </p>
           <div className='md:justify-evenly text-center w-full mt-5 flex md:flex-row flex-col items-center text-white'>
-            <button className="bg-cyan-700 py-4 px-2 w-[277px] rounded-lg">
+            <button onClick={() => router.push('/personal')} className="bg-cyan-700 py-4 px-2 w-[277px] rounded-lg">
               Create Your Story
             </button>
 
             <button className="bg-cyan-700 py-4 px-2 w-[277px] rounded-lg md:mt-0 mt-2">
-             Browse Stories
+              Browse Stories
             </button>
           </div>
         </div>
