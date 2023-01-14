@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Custom-1";
+  src: url("../font/Whisper-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Custom-2";
+  src: url("../font/Lato-Regular.ttf");
+}
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -108,4 +118,9 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.icon {
+  background: url(/public/search.svg) no-repeat left;
+  background-size: 20px;
 }
