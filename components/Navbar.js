@@ -48,18 +48,18 @@ export default function Navbar() {
                             </li>
                         </ul>
                     </div>
-                    <a href="/browse"
+                    <Link href="/browse"
                     className=" block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">
                         Browse
-                    </a>
-                    <a href="#responsive-header"
+                    </Link>
+                    <Link href="#responsive-header"
                     className="block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">
                         About Us
-                    </a>
+                    </Link>
                 </div>
-                    <div className="block lg:inline-block mt-2 lg:mt-0 text-center">
+                    {/* <div className="block lg:inline-block mt-2 lg:mt-0 text-center">
                         <a href="#" className="text-md px-4 rounded text-blue-700 ml-2 font-bold hover:text-white mt-4 hover:bg-blue-700 lg:mt-0">Sign in</a>
-                    </div>
+                    </div> */}
             </div>
         </nav>
         

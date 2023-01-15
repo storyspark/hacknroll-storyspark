@@ -27,7 +27,7 @@ export default function Home() {
               Create Your Story
             </button>
 
-            <button className="bg-cyan-700 py-4 px-2 w-[277px] rounded-lg md:mt-0 mt-2">
+            <button onClick={() => router.push('browse')} className="bg-cyan-700 py-4 px-2 w-[277px] rounded-lg md:mt-0 mt-2">
               Browse Stories
             </button>
           </div>
