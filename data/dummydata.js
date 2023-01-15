@@ -8,7 +8,7 @@ export const storyData = [
      "imagePrompt": "A broken mirror on the wall",
      "isPrivate": false,
      "storyResult": "As you stepped closer to the mirror, you could see your own reflection - but something was wrong. Your reflection seemed to be moving, stretching and morphing, coming closer and closer to the glass. You stepped back in fear, but it was too late. Your reflection had already stepped out of the mirror and was standing in front of you.",
-     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Broken_mirror.jpg"
+     "imageUrl": "https://www.google.com/url?sa=i&url=http%3A%2F%2Ft3.gstatic.com%2Flicensed-image%3Fq%3Dtbn%3AANd9GcS-OZTPpZNsnOchlOMmYsSeMprn5sYU4kdOZGPL0_ksM2nHGegFrzLhGlQMBF-amQqPRFs4DzbLrI_o5gA&psig=AOvVaw1Z00hT_-YhCC2-Wn-gyXHQ&ust=1673817704690000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCODDhf_-x_wCFQAAAAAdAAAAABAE"
     },
     {
      "user": "samtan500",

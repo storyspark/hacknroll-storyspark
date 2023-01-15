@@ -11,22 +11,21 @@ export default function StoryCard(story) {
                 <CardMedia
                 component="img"
                 height="140"
-                image="https://www.google.com/url?sa=i&url=http%3A%2F%2Ft2.gstatic.com%2Flicensed-image%3Fq%3Dtbn%3AANd9GcSBJh08PvQ6eaN1JuPclUvtBC9CFjvPlrFYIjgu8pxL8oA0fhxeJ1Fqdtjlsr5P8zFv71xCC7VgKuvjmTw&psig=AOvVaw33mXecMNJ8hKl0MymVsWZb&ust=1673772209469000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCOi_ksHVxvwCFQAAAAAdAAAAABAE"
-                alt="green iguana"
+                image={story.story.imageUrl}
                 />
                 <CardContent>
-                    <Typography variant="h5" component="div">
+                    <Typography className="text-[#23395d] font-bold" variant="h6" component="div">
                             {story.story.title}
                     </Typography>
                     <Stack spacing={1}>
                         <div className='h-1/6'>
-                            <Typography noWrap sx={{
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                WebkitLineClamp: "6",
+                            <Typography sx={{
+                                display: '-webkit-box',
+                                overflow: 'hidden',
+                                WebkitBoxOrient: 'vertical',
+                                WebkitLineClamp: 3
                             }} variant="body2" color="text.secondary">
-                                Lizards are a widespread group of squamate reptiles, with over 6,000
-                                species, ranging across all continents except Antarctica
+                                {story.story.storyResult}
                             </Typography>
                         </div>
                         <Typography fontWeight="bold" variant="body2" color="text.secondary">
