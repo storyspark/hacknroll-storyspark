@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Navbar from '@/components/Navbar'
 import HTMLFlipBook from 'react-pageflip';
 import Image from "next/image";
-import next from 'next';
+import axios from 'axios';
+import { CardMedia } from '@mui/material';
 
 const PageCover = React.forwardRef((props, ref) => {
     return (
@@ -30,7 +31,7 @@ const PageCover = React.forwardRef((props, ref) => {
     );
   });
   MainPage.displayName = "MainPage";
-
+  
   const Page = React.forwardRef((props, ref) => {
     return (
       <div className="flex align-center text-left px-8 bg-[#FAF9F6]" ref={ref}>
@@ -46,17 +47,19 @@ const PageCover = React.forwardRef((props, ref) => {
 
 export default function Form() {
    const book = useRef();
+   const [ isLoading, setIsLoading ] = useState(false);
+   const [ isLastPage, setIsLastPage ] = useState(false)
    const [userState, setUserState] = useState({
       category: "",
       tone: "",
-      email: "",
-      story: "",
-      image: "",
+      author: "",
+      storyPrompt: "",
+      imagePrompt: "",
       title: "",
       isPrivate: "false",
     });
 
-   const businessCategories = ["Advertisements", "Brochures", "Websites", "General marketing", "Technical Writing", "Grant writing", "Professional email", "Content Writing", "Speech Writing", "Travel Writing"];
+  const businessCategories = ["Advertisements", "Brochures", "Websites", "General marketing", "Technical Writing", "Grant writing", "Professional email", "Content Writing", "Speech Writing", "Travel Writing"];
    const badWords = [
       "4r5e",
       "5h1t",
@@ -340,18 +343,102 @@ export default function Form() {
             break;
          }
       }
+      setIsLoading(true);
+      event.preventDefault()
 
       if (flag) {
          event.preventDefault()
          return false;
       } else {
-         // Submit to BE
+        let chatgpt = {
+          "model": "text-davinci-003",
+          "prompt": "Make a " + userState.category + " story with a " + userState.tone + " and this prompt: " + userState.storyPrompt,
+          "max_tokens": 1000,
+          "temperature": 0.7
+        }
+
+        let chatgptconfig = {
+          method: 'post',
+          url: 'https://api.openai.com/v1/completions',
+          headers: { 
+            'Content-Type': 'application/json', 
+            'Authorization': 'Bearer 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'
+          },
+          data : chatgpt
+        };
+        
+        axios(chatgptconfig)
+        .then(function (response) {
+          setUserState((prevProps) => ({
+            ...prevProps,
+            storyResult: response.data.choices[0]?.text,
+          }))
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+
+        let dalle = {
+          "prompt":  userState.imagePrompt,
+          "n": 2,
+          "size": "1024x1024"
+        }
+
+        let dalleconfig = {
+          method: 'post',
+          url: 'https://api.openai.com/v1/images/generations',
+          headers: { 
+            'Content-Type': 'application/json', 
+            'Authorization': 'Bearer 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'
+          },
+          data : dalle
+        };
+        
+        axios(dalleconfig)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+          setUserState((prevProps) => ({
+            ...prevProps,
+            imageUrl: response.data.data[0]?.url,
+          }))
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
       }
+
+      setIsLoading(false);
     }
 
-    useEffect(() => {
-      console.log(userState)
-    }, [userState])
+    const handlePost = (event) => {
+      setUserState((prevProps) => ({
+        ...prevProps,
+        type: "Professional",
+      }))
+      let body = JSON.parse(JSON.stringify(userState));
+
+      event.preventDefault();
+      
+      axios.post("https://eugenetayyj.pythonanywhere.com/storyboards/storyboard/", body)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+      book.current.pageFlip().flipNext()
+    }
+
+    const onFlip = useCallback((e) => {
+      if (e.data == 5) {
+        setIsLastPage(true);
+      } else {
+        setIsLastPage(false);
+      }
+    }, []);
 
    return (
     <>
@@ -371,6 +458,7 @@ export default function Form() {
                     showCover={true}
                     mobileScrollSupport={true}
                     useMouseEvents={false}
+                    onFlip={onFlip}
                     ref={book}
                     className="border border-yellow-500 shadow-md my-5 lg:mt-4">
                     <PageCover>Begin your story</PageCover>
@@ -394,7 +482,7 @@ export default function Form() {
                             <label className='py-2 font-medium lg:text-xl md:text-lg text-md text-gray-600'>
                                 Email
                                 <p className='py-2 lg:text-[15px] text-[12px] font-thin'>Who wrote this?</p>
-                                <input onBlur={handleInputChange} type="email" name="email" className='bg-white lg:text-[15px] text-[12px] px-4 w-[80%]'/>
+                                <input onBlur={handleInputChange} type="email" name="author" className='bg-white lg:text-[15px] text-[12px] px-4 w-[80%]'/>
                             </label>
                         </form>
                     </Page>
@@ -404,13 +492,13 @@ export default function Form() {
                            <label className='py-2 font-medium lg:text-xl md:text-lg text-md md:mt-2 text-gray-600'>
                                 Story Prompt
                                 <p className='py-2 lg:text-[15px] text-[12px] font-thin'>This will generate your story!.</p>
-                                <textarea onBlur={handleInputChange} type="text" name="story" className='lg:text-[15px] text-[12px] whitespace-normal text-justify bg-white px-4 w-[80%] lg:h-24 h-16'/>
+                                <textarea onBlur={handleInputChange} type="text" name="storyPrompt" className='lg:text-[15px] text-[12px] whitespace-normal text-justify bg-white px-4 w-[80%] lg:h-24 h-16'/>
                             </label>
 
                             <label className='py-2 font-medium lg:text-xl md:text-lg text-md text-gray-600'>
                                 Image Prompt
                                 <p className='py-2 lg:text-[15px] text-[12px] font-thin'>This will inspire the cover!</p>
-                                <textarea onBlur={handleInputChange} type="text" name="image" className='lg:text-[15px] text-[12px] whitespace-normal text-justify bg-white px-4 w-[80%] lg:h-24 h-16'/>
+                                <textarea onBlur={handleInputChange} type="text" name="imagePrompt" className='lg:text-[15px] text-[12px] whitespace-normal text-justify bg-white px-4 w-[80%] lg:h-24 h-16'/>
                             </label>
                         </form>
                     </Page>
@@ -432,20 +520,27 @@ export default function Form() {
                                  </select>
                             </label>
                             <button onClick={handleSubmit} className="text-white bg-cyan-700 my-6 px-4 w-[80%] h-[50px] rounded-lg md:mt-0 mt-2">Submit</button>
+                            {isLoading ? <p>...Loading</p> : <button onClick={handlePost} className="text-white bg-cyan-700 px-4 w-[80%] h-[50px] rounded-lg mt-0">View your story</button>}
                         </form>
                     </Page>
                     <MainPage title="Congrats!">Here is your new Story.</MainPage>
-                    <Page>Insert Story here</Page>
+                    <Page>
+                      <div className="h-full max-h-screen overflow-y-auto flex flex-col flex-grow bg-white">
+                      <h1 className='underline font-custom1 text-center'>{userState.title}</h1>
+                      <CardMedia src={userState.imageUrl} component="img" alt="thumbnail" width={30} height={30} className="p-0 m-0 h-[200px] w-[50px]"></CardMedia>
+                      <div className="bg-gray-50 max-h-[190px] overflow-y-auto">{userState.storyResult}</div>
+                      </div>
+                    </Page>
                 </HTMLFlipBook>
 
                 <div className='justify-evenly text-center w-full mt-5 flex flex-row items-center text-white'>
                     <button onClick={() => book.current.pageFlip().flipPrev()} className="bg-cyan-700 px-4 lg:w-[250px] w-[150px] h-[50px] rounded-lg md:mt-0 mt-2">
                     Previous
                     </button>
+                    {isLastPage ? <></> : <button onClick={() => book.current.pageFlip().flipNext()}  className="bg-cyan-700 px-4 lg:w-[250px] w-[150px] h-[50px] rounded-lg md:mt-0 mt-2">
+                      Next
+                    </button> }
 
-                    <button onClick={() => book.current.pageFlip().flipNext()}  className="bg-cyan-700 px-4 lg:w-[250px] w-[150px] h-[50px] rounded-lg md:mt-0 mt-2">
-                    Next
-                    </button>
                 </div>
             </div>
         </div>

@@ -37,14 +37,14 @@ export default function Navbar() {
                 </div>
                 <div className={`flex-1 text-black justify-self-center lg:block lg:pb-0 lg:mt-0 transition-all duration-500 ${
                             navbar ? "block" : "hidden delay-200"}`}>
-                    <button onClick={() => setDropDown(!dropDown)} className="text-black font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button">Create <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-                    <div id="dropdown" class={`${dropDown ? "visible": "hidden"} z-10 fixed bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-100`}>
-                        <ul class="py-1 text-sm text-black dark:text-gray-800" aria-labelledby="dropdownDefaultButton">
+                    <button onClick={() => setDropDown(!dropDown)} className="text-black font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button">Create <svg className="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                    <div id="dropdown" className={`${dropDown ? "visible": "hidden"} z-10 fixed bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-100`}>
+                        <ul className="py-1 text-sm text-black dark:text-gray-800" aria-labelledby="dropdownDefaultButton">
                             <li>
-                                <Link href="/personal" class="block px-4 py-2 hover:bg-gray-800 dark:hover:bg-gray-200 dark:hover:text-gray-800">Personal</Link>
+                                <Link href="/personal" className="block px-4 py-2 hover:bg-gray-800 dark:hover:bg-gray-200 dark:hover:text-gray-800">Personal</Link>
                             </li>
                             <li>
-                                <Link href="/professional" class="block px-4 py-2 hover:bg-gray-800 dark:hover:bg-gray-200 dark:hover:text-gray-800">Professional</Link>
+                                <Link href="/professional" className="block px-4 py-2 hover:bg-gray-800 dark:hover:bg-gray-200 dark:hover:text-gray-800">Professional</Link>
                             </li>
                         </ul>
                     </div>
