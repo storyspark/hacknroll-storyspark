@@ -54,12 +54,12 @@ export default function Browse() {
     return (
         <main>
             <Navbar></Navbar>
-            <div className="overflow-y-auto bg-white h-full">
+            <div className="overflow-y-auto flex flex-col justify-center bg-white h-full">
                 <div className="flex flex-row justify-end align-right mar mb-2 mt-2 ">
-                    <select onChange={handleTypeChange} className='bg-gray-100 md:py-2 w-[15%] lg:text-[15px] text-[12px] font-thin bg-white mar m-1 rounded'>
+                    <select onChange={handleTypeChange} className='bg-gray-700 md:py-2 w-[15%] lg:text-[15px] text-[12px] font-thin bg-white mar m-1 rounded'>
                         {storyTypes.map((item, key) => <option key={key} value={item}>{item}</option>)}
                     </select>
-                    <select onChange={handleCategoryChange} className='bg-gray-100 md:py-2 w-[15%] lg:text-[15px] text-[12px] font-thin bg-white mar m-1 rounded'>
+                    <select onChange={handleCategoryChange} className='bg-gray-700 md:py-2 w-[15%] lg:text-[15px] text-[12px] font-thin bg-white mar m-1 rounded'>
                         {
                             type === "Standard" ? standardCategories.map((item, key) => <option key={key} value={item}>{item}</option>)
                             :  type === "Business" ? businessCategories.map((item, key) => <option key={key} value={item}>{item}</option>)
@@ -67,10 +67,11 @@ export default function Browse() {
                         }
                     </select>
                 </div>
-                <div className="overflow-y-auto">
+                <div className="flex px-3 overflow-y-auto">
                     <Grid container spacing={1} direction="row">
                         {displayedStories?.map((data, key) => (
-                            <Grid item key={key} className="h-1/4">
+                            <Grid item key={key}  alignItems="center"
+                            justifyContent="center" className="lg:h-1/5 h-1/9">
                                 <StoryCard
                                 story={data}
                                 key={key} />
