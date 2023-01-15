@@ -20,7 +20,6 @@ export default function Browse() {
     async function fetchData() {
         try {
             const response = await axios.get("https://eugenetayyj.pythonanywhere.com/storyboards/storyboard/")
-            console.log(response.data)
             setStoryData(response.data)
             setDisplayedStories(response.data);
             setTypeFilter(response.data)
