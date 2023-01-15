@@ -59,7 +59,7 @@ export default function Browse() {
                     <select onChange={handleTypeChange} className='bg-gray-100 md:py-2 w-[15%] lg:text-[15px] text-[12px] font-thin bg-white mar m-1 rounded'>
                         {storyTypes.map((item, key) => <option key={key} value={item}>{item}</option>)}
                     </select>
-                    <select onChange={handleCategoryChange} className='md:py-2 w-[15%] lg:text-[15px] text-[12px] font-thin bg-white mar m-1 rounded'>
+                    <select onChange={handleCategoryChange} className='bg-gray-100 md:py-2 w-[15%] lg:text-[15px] text-[12px] font-thin bg-white mar m-1 rounded'>
                         {
                             type === "Standard" ? standardCategories.map((item, key) => <option key={key} value={item}>{item}</option>)
                             :  type === "Business" ? businessCategories.map((item, key) => <option key={key} value={item}>{item}</option>)
