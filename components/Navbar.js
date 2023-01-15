@@ -52,7 +52,7 @@ export default function Navbar() {
                     className=" block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">
                         Browse
                     </Link>
-                    <Link href="#responsive-header"
+                    <Link href="/aboutus"
                     className="block mt-4 lg:inline-block lg:mt-0 hover:text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">
                         About Us
                     </Link>
