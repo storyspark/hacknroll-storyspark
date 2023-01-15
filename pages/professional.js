@@ -50,8 +50,8 @@ export default function Form() {
       category: "",
       tone: "",
       email: "",
-      story: "",
-      image: "",
+      storyPrompt: "",
+      imagePrompt: "",
       title: "",
       isPrivate: "false",
     });
@@ -404,13 +404,13 @@ export default function Form() {
                            <label className='py-2 font-medium lg:text-xl md:text-lg text-md md:mt-2 text-gray-600'>
                                 Story Prompt
                                 <p className='py-2 lg:text-[15px] text-[12px] font-thin'>This will generate your story!.</p>
-                                <textarea onBlur={handleInputChange} type="text" name="story" className='lg:text-[15px] text-[12px] whitespace-normal text-justify bg-white px-4 w-[80%] lg:h-24 h-16'/>
+                                <textarea onBlur={handleInputChange} type="text" name="storyPrompt" className='lg:text-[15px] text-[12px] whitespace-normal text-justify bg-white px-4 w-[80%] lg:h-24 h-16'/>
                             </label>
 
                             <label className='py-2 font-medium lg:text-xl md:text-lg text-md text-gray-600'>
                                 Image Prompt
                                 <p className='py-2 lg:text-[15px] text-[12px] font-thin'>This will inspire the cover!</p>
-                                <textarea onBlur={handleInputChange} type="text" name="image" className='lg:text-[15px] text-[12px] whitespace-normal text-justify bg-white px-4 w-[80%] lg:h-24 h-16'/>
+                                <textarea onBlur={handleInputChange} type="text" name="imagePrompt" className='lg:text-[15px] text-[12px] whitespace-normal text-justify bg-white px-4 w-[80%] lg:h-24 h-16'/>
                             </label>
                         </form>
                     </Page>
