@@ -57,9 +57,9 @@ export default function Navbar() {
                         About Us
                     </Link>
                 </div>
-                    <div className="block lg:inline-block mt-2 lg:mt-0 text-center">
+                    {/* <div className="block lg:inline-block mt-2 lg:mt-0 text-center">
                         <a href="#" className="text-md px-4 rounded text-blue-700 ml-2 font-bold hover:text-white mt-4 hover:bg-blue-700 lg:mt-0">Sign in</a>
-                    </div>
+                    </div> */}
             </div>
         </nav>
         
