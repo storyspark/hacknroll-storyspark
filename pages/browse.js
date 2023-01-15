@@ -19,8 +19,11 @@ export default function Browse() {
 
     async function fetchData() {
         try {
-          const response = await axios.get("https://eugenetayyj.pythonanywhere.com/storyboards/storyboard/")
-          setStoryData(response.data)
+            const response = await axios.get("https://eugenetayyj.pythonanywhere.com/storyboards/storyboard/")
+            console.log(response.data)
+            setStoryData(response.data)
+            setDisplayedStories(response.data);
+            setTypeFilter(response.data)
         } catch (error) {
           console.error(error);
         }
@@ -28,8 +31,6 @@ export default function Browse() {
     
     useEffect(() => {
         fetchData();
-        setDisplayedStories(storyData);
-        setTypeFilter(storyData)
     }, [])
 
     
@@ -51,34 +52,33 @@ export default function Browse() {
     }
 
     return (
-        <>
         <main>
             <Navbar></Navbar>
-            <div className="flex flex-row mar mb-2 mt-2">
-                <select onChange={handleTypeChange} className='md:py-2 w-[80%] lg:text-[15px] text-[12px] font-thin bg-white mar m-1 rounded'>
-                    {storyTypes.map((item, key) => <option key={key} value={item}>{item}</option>)}
-                </select>
-                <select onChange={handleCategoryChange} className='md:py-2 w-[80%] lg:text-[15px] text-[12px] font-thin bg-white mar m-1 rounded'>
-                    {
-                        type === "Standard" ? standardCategories.map((item, key) => <option key={key} value={item}>{item}</option>)
-                        :  type === "Business" ? businessCategories.map((item, key) => <option key={key} value={item}>{item}</option>)
-                        :  allCategories.map((item, key) => <option key={key} value={item}>{item}</option>)
-                    }
-                </select>
+            <div className="overflow-y-auto bg-white h-full">
+                <div className="flex flex-row justify-end align-right mar mb-2 mt-2 ">
+                    <select onChange={handleTypeChange} className='bg-gray-100 md:py-2 w-[15%] lg:text-[15px] text-[12px] font-thin bg-white mar m-1 rounded'>
+                        {storyTypes.map((item, key) => <option key={key} value={item}>{item}</option>)}
+                    </select>
+                    <select onChange={handleCategoryChange} className='md:py-2 w-[15%] lg:text-[15px] text-[12px] font-thin bg-white mar m-1 rounded'>
+                        {
+                            type === "Standard" ? standardCategories.map((item, key) => <option key={key} value={item}>{item}</option>)
+                            :  type === "Business" ? businessCategories.map((item, key) => <option key={key} value={item}>{item}</option>)
+                            :  allCategories.map((item, key) => <option key={key} value={item}>{item}</option>)
+                        }
+                    </select>
+                </div>
+                <div className="overflow-y-auto">
+                    <Grid container spacing={1} direction="row">
+                        {displayedStories?.map((data, key) => (
+                            <Grid item key={key} className="h-1/4">
+                                <StoryCard
+                                story={data}
+                                key={key} />
+                            </Grid>
+                        ))}
+                    </Grid>
+                </div>
             </div>
-            <div className="storyContainer">
-                <Grid container spacing={1} direction="row">
-                    {displayedStories?.map((data, key) => (
-                        <Grid item key={key} className="h-1/4">
-                            <StoryCard
-                            story={data}
-                            key={key} />
-                        </Grid>
-                    ))}
-                </Grid>
-            </div>
-        </main>
-        </>
-        
+        </main>        
   )
 }
