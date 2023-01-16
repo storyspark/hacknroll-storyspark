@@ -362,7 +362,7 @@ export default function Form() {
           url: 'https://api.openai.com/v1/completions',
           headers: { 
             'Content-Type': 'application/json', 
-            'Authorization': 'Bearer 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'
+            'Authorization': 'Bearer'
           },
           data : chatgpt
         };
@@ -391,7 +391,7 @@ export default function Form() {
           url: 'https://api.openai.com/v1/images/generations',
           headers: { 
             'Content-Type': 'application/json', 
-            'Authorization': 'Bearer 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'
+            'Authorization': 'Bearer'
           },
           data : dalle
         };
